@@ -1,26 +1,43 @@
 import Link from 'next/link'
 import React from 'react'
 
-
 const Navbar = () => {
-    return (
-        <nav className='h-16 bg-purple-500 flex justify-center px-3 items-center text-white'>
-            <ul className='flex gap-8'>
-                <Link href="/"><li>Home</li></Link>
-                <Link href=""><li>About</li></Link>
-                <Link href=""><li>Shortener</li></Link>
-                <Link href=""><li>COntact us</li></Link>
-                <li className='felx '>
-                    <Link href=""><li>try now</li></Link>
-                    <Link href=""><li>git hub</li></Link>
-                </li>
+  return (
+    <nav className="h-16 bg-purple-500 flex justify-between px-6 items-center text-white">
+      {/* Logo */}
+      <div className="logo font-bold text-2xl">
+        <Link href="/">BitLinks</Link>
+      </div>
 
+      {/* Navigation Links */}
+      <ul className="flex gap-8 items-center">
+        <li>
+          <Link href="/">Home</Link>
+        </li>
+        <li>
+          <Link href="/about">About</Link>
+        </li>
+        <li>
+          <Link href="/shorten">Shortener</Link>
+        </li>
+        <li>
+          <Link href="/contact">Contact Us</Link>
+        </li>
 
-            </ul>
-        </nav>
-
-
-    )
+        {/* Extra Links Group */}
+        <li>
+          <ul className="flex gap-4">
+            <li>
+              <Link href="/shorten">Try Now</Link>
+            </li>
+            <li>
+              <Link href="/github">GitHub</Link>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  )
 }
 
 export default Navbar
