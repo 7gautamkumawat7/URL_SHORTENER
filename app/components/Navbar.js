@@ -31,7 +31,7 @@ const Navbar = () => {
               <Link href="/shorten">Try Now</Link>
             </li>
             <li>
-              <Link href="/github">GitHub</Link>
+              <Link href="https://github.com/7gautamkumawat7/">GitHub</Link>
             </li>
           </ul>
         </li>
