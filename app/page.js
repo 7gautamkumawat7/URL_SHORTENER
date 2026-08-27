@@ -6,7 +6,7 @@ import React, { useState, useEffect } from "react";
 
 export default function Home() {
   const [displayText, setDisplayText] = useState("");
-    const text = "Welcome to My Home Page!|Short links, big impact.|Turn long URLs into smart links.|Share smarter, faster, easier.|Track clicks. Build trust.|Your link, your brand.";
+  const text = "Welcome to My Home Page!|Short links, big impact.|Turn long URLs into smart links.|Share smarter, faster, easier.|Track clicks. Build trust.|Your link, your brand.";
 
   useEffect(() => {
     let index = 0;
@@ -39,15 +39,19 @@ export default function Home() {
         </div>
 
         {/* Column 2 */}
+        {/* Column 2 */}
         <div className="w-full md:w-1/2 flex justify-center p-4 py-6">
           <Image
             src="/group.jpg"
-            height={300}
-            width={300}
             alt="An image of group"
+            width={300}
+            height={300}
+            loading="eager"   // ✅ prioritize this image for LCP
             className="mix-blend-darken h-auto w-auto"
           />
         </div>
+
+
       </section>
 
       {/* Auto-writing text section */}
