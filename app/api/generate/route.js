@@ -1,44 +1,53 @@
-import clientPromise from "@/lib/mongodb"
-import { NextResponse } from "next/server"
+import clientPromise from "@/lib/mongodb";
+import { NextResponse } from "next/server";
 
 export async function POST(request) {
   try {
-    const body = await request.json()
-    const client = await clientPromise
-    const db = client.db("bitlinks")
-    const collection = db.collection("url")
+    const body = await request.json();
+    const { url, shorturl } = body;
 
-    // Check if the short url exists
-    const doc = await collection.findOne({ shorturl: body.shorturl })
-    if (doc) {
+    if (!url || !shorturl) {
+      return NextResponse.json(
+        { success: false, error: true, message: "URL and shortcode are required" },
+        { status: 400 }
+      );
+    }
+
+    const client = await clientPromise;
+    const db = client.db("bitlinks");
+    const collection = db.collection("url");
+
+    // Make sure the chosen slug is not already taken
+    const existing = await collection.findOne({ shorturl });
+    if (existing) {
       return NextResponse.json({
         success: false,
         error: true,
-        message: "URL already exists!"
-      })
+        message: "This short code is already taken. Try another one!",
+      });
     }
 
-    // Insert new document
+    // Save the new link with timestamp
     await collection.insertOne({
-      url: body.url,
-      shorturl: body.shorturl,
-      createdAt: new Date()
-    })
+      url,
+      shorturl,
+      createdAt: new Date(),
+    });
 
-    // ✅ Return the actual short URL
-    const shortUrl = `${process.env.NEXT_PUBLIC_HOST}/${body.shorturl}`
+    const host = process.env.NEXT_PUBLIC_HOST || "http://localhost:3000";
+    const shortUrl = `${host}/${shorturl}`;
 
     return NextResponse.json({
       success: true,
       error: false,
-      message: "URL Generated Successfully",
-      shortUrl
-    })
+      message: "Short URL generated successfully",
+      shortUrl,
+    });
   } catch (err) {
-    return NextResponse.json({
-      success: false,
-      error: true,
-      message: "Internal Server Error"
-    }, { status: 500 })
+    console.error("Link generation error:", err);
+    return NextResponse.json(
+      { success: false, error: true, message: "Server error occurred while creating link" },
+      { status: 500 }
+    );
   }
 }
