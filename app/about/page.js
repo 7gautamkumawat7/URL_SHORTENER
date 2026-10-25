@@ -1,5 +1,13 @@
+import { pageMetadata } from "@/lib/seo";
+
 import React from "react";
 import Link from "next/link";
+
+export const metadata = pageMetadata(
+  "About",
+  "Learn about BitLinks, a URL shortener built to turn long web addresses into compact, memorable links for everyday sharing.",
+  "/about"
+);
 
 const AboutPage = () => {
   return (
