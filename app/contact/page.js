@@ -1,4 +1,12 @@
+import { pageMetadata } from "@/lib/seo";
+
 import React from "react";
+
+export const metadata = pageMetadata(
+  "Contact",
+  "Get in touch with Gautam Kumawat, the creator of BitLinks, for feedback, questions, and collaboration opportunities.",
+  "/contact"
+);
 
 const ContactPage = () => {
   return (
