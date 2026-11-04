@@ -253,3 +253,25 @@ Full-Stack Web Developer
 - **GitHub**: [@7gautamkumawat7](https://github.com/7gautamkumawat7)
 - **Instagram**: [@go_tam5333](https://instagram.com/go_tam5333)
 - **Email**: [7gautamkumawat7@gmail.com](mailto:7gautamkumawat7@gmail.com)
+
+
+## SEO configuration
+
+Public pages (`/`, `/shorten`, `/about`, `/contact`) have unique titles,
+descriptions, canonical URLs, Open Graph metadata, and Twitter summary cards.
+The homepage includes WebApplication JSON-LD. `/opengraph-image` renders the
+shared 1200 × 630 social preview as a PNG.
+
+Set `SITE_URL` to the absolute production origin when using a custom domain.
+It defaults to `https://bitlinksg.vercel.app`; keep it the same on preview
+builds so they point to the production canonical URLs. `NEXT_PUBLIC_HOST`
+continues to control generated short links independently.
+
+`/robots.txt` advertises `/sitemap.xml` and excludes API routes from crawling.
+The sitemap lists only the four public pages; short-link aliases have
+`noindex, follow` metadata and are omitted from the sitemap. Redirect behavior
+is unchanged.
+
+After deployment, verify the canonical domain and submit `/sitemap.xml` in
+Google Search Console. Search indexing and ranking are controlled by search
+engines, not guaranteed by these metadata changes.

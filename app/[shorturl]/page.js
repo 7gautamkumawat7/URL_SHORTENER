@@ -1,6 +1,11 @@
 import { redirect } from "next/navigation";
 import clientPromise from "@/lib/mongodb";
 
+// Redirect aliases should not appear as duplicate search results.
+export const metadata = {
+  robots: { index: false, follow: true },
+};
+
 export default async function Page({ params }) {
   const { shorturl } = await params;
 
